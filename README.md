@@ -2,6 +2,22 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Environment variables
+
+This repo uses a template file `.env.example`.
+
+- Copy it to `.env.local` (this is what Next.js loads by default):
+  - `cp .env.example .env.local`
+
+Required for the app to run with all integrations prepared:
+- MongoDB: `MONGODB_URI`
+- Auth (Google OAuth): `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `AUTH_SECRET`, `AUTH_URL`
+- Resend: `RESEND_API_KEY`, `RESEND_FROM_EMAIL`
+- Retell.ai: `RETELL_API_KEY`, `RETELL_WEBHOOK_SECRET`
+- Gemini (optional/prepared): `GEMINI_API_KEY`
+
+### Run
+
 First, run the development server:
 
 ```bash
