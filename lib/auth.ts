@@ -109,7 +109,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       // Expose user id on the session for server-side access control.
       if (session.user && token.sub) {
-        // @ts-expect-error - we extend the session shape in types/auth.d.ts
         session.user.id = token.sub;
       }
       return session;

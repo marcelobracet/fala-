@@ -24,21 +24,26 @@ export function CredentialsRegisterForm() {
 
     if (!res.ok) {
       const body = await res.json().catch(() => null);
-      if (body?.error === "email_in_use") setError("Esse e-mail já está em uso.");
-      else setError("Não foi possível criar a conta. Verifique os dados e tente novamente.");
+      if (body?.error === "email_in_use")
+        setError("Esse e-mail já está em uso.");
+      else
+        setError(
+          "Não foi possível criar a conta. Verifique os dados e tente novamente."
+        );
       setLoading(false);
       return;
     }
 
     // Auto sign-in after successful registration.
-    await signIn("credentials", {
+    const signInRes = await signIn("credentials", {
       email,
       password,
       callbackUrl: "/dashboard",
-      redirect: true,
+      redirect: false,
     });
 
-    setLoading(false);
+    if (signInRes?.url) window.location.href = signInRes.url;
+    else setLoading(false);
   }
 
   return (
@@ -109,5 +114,3 @@ export function CredentialsRegisterForm() {
     </form>
   );
 }
-
-

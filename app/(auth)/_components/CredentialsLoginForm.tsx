@@ -18,13 +18,17 @@ export function CredentialsLoginForm() {
       email,
       password,
       callbackUrl: "/dashboard",
-      redirect: true,
+      redirect: false,
     });
 
-    // When redirect=true, this is usually null. Keep error handling for edge cases.
-    if (res?.error) setError("E-mail ou senha inválidos.");
+    if (res?.error) {
+      setError("E-mail ou senha inválidos.");
+      setLoading(false);
+      return;
+    }
 
-    setLoading(false);
+    if (res?.url) window.location.href = res.url;
+    else setLoading(false);
   }
 
   return (
