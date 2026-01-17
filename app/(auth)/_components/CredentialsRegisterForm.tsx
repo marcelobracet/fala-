@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, type SignInResponse } from "next-auth/react";
 
 export function CredentialsRegisterForm() {
   const [companyName, setCompanyName] = useState("");
@@ -35,7 +35,7 @@ export function CredentialsRegisterForm() {
     }
 
     // Auto sign-in after successful registration.
-    const signInRes = await signIn("credentials", {
+    const signInRes: SignInResponse | undefined = await signIn("credentials", {
       email,
       password,
       callbackUrl: "/dashboard",

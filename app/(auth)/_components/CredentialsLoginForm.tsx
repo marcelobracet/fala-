@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, type SignInResponse } from "next-auth/react";
 
 export function CredentialsLoginForm() {
   const [email, setEmail] = useState("");
@@ -14,7 +14,7 @@ export function CredentialsLoginForm() {
     setError(null);
     setLoading(true);
 
-    const res = await signIn("credentials", {
+    const res: SignInResponse | undefined = await signIn("credentials", {
       email,
       password,
       callbackUrl: "/dashboard",
